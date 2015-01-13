@@ -29,13 +29,39 @@ class Feed(object):
             return True, self.json_representation
 
 class Location(object):
-    """Location object - Responsible for holding required weather properties for each location"""
+    """Location object - Responsible for saving weather properties for each location"""
 
+    def __init__(self, location_name, temp_f, temp_c, temp_full, weather_desc, observation_time):
+        self.location_name = location_name
+        self.temp_f = temp_f
+        self.temp_c = temp_c
+        self.temp_full = temp_full
+        self.weather_desc = weather_desc
+        self.observation_time = observation_time
 
-
+    def print_string_representation(self):
+        print self.location_name
+        print self.temp_full
+        print self.weather_desc
+        print self.observation_time
 
 feed = Feed("http://api.wunderground.com/api/5b40e5dfadfc56e9/conditions/q/CA/San_Jose.json")
 feed.load_and_prepare()
+
+info = feed.get_representation[1]
+current = info.get("current_observation")
+
+full = current.get("display_location").get("full")
+temp_f = current.get("temp_f")
+temp_c = current.get("temp_c")
+weather = current.get("weather")
+temperature_string = current.get("temperature_string")
+obs_time = current.get("observation_time")
+
+location = Location(full, temp_f, temp_c, temperature_string, weather, obs_time)
+location.print_string_representation()
+
+# print current
 # print feed.formatted_response_data
 
 
