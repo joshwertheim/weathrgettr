@@ -46,6 +46,8 @@ class Location(object):
         print self.observation_time
 
 def main():
+    # TODO - add support for http://api.wunderground.com/api/5b40e5dfadfc56e9/forecast/q/CA/San_Francisco.json
+    
     feed = Feed("http://api.wunderground.com/api/5b40e5dfadfc56e9/conditions/q/CA/San_Jose.json")
     feed.load_and_prepare()
 
