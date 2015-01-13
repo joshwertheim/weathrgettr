@@ -1,5 +1,7 @@
+import os
 import urllib2
 import json
+import ConfigParser
 
 class Feed(object):
     """Feed object - Responsible for loading JSON data at given URL"""
@@ -47,8 +49,12 @@ class Location(object):
 
 def main():
     # TODO - add support for http://api.wunderground.com/api/5b40e5dfadfc56e9/forecast/q/CA/San_Francisco.json
-    
-    feed = Feed("http://api.wunderground.com/api/5b40e5dfadfc56e9/conditions/q/CA/San_Jose.json")
+
+    config = ConfigParser.RawConfigParser()
+    config.read("../resources/prefs.txt")
+    key = config.get('API', 'api_key')
+
+    feed = Feed("http://api.wunderground.com/api/%s/conditions/q/CA/San_Jose.json" % key)
     feed.load_and_prepare()
 
     info = feed.get_representation[1]
