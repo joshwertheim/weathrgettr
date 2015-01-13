@@ -48,7 +48,7 @@ class Location(object):
         print self.observation_time
 
 def main():
-    # TODO - add support for http://api.wunderground.com/api/5b40e5dfadfc56e9/forecast/q/CA/San_Francisco.json
+    # TODO - add support for http://api.wunderground.com/api/_APIKey_/forecast/q/CA/San_Francisco.json
 
     config = ConfigParser.RawConfigParser()
     config.read("../resources/prefs.txt")
