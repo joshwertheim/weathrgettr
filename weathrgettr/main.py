@@ -70,12 +70,5 @@ def main():
     location = Location(full, temp_f, temp_c, temperature_string, weather, obs_time)
     location.print_string_representation()
 
-    # print current
-    # print feed.formatted_response_data
-
 if __name__ == "__main__":
     main()
-
-
-
-
