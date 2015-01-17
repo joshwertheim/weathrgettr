@@ -1,3 +1,4 @@
+import sys
 import os
 import urllib2
 import json
@@ -60,15 +61,23 @@ def main():
     info = feed.get_representation[1]
     current = info.get("current_observation")
 
-    full = current.get("display_location").get("full")
-    temp_f = current.get("temp_f")
-    temp_c = current.get("temp_c")
-    weather = current.get("weather")
-    temperature_string = current.get("temperature_string")
-    obs_time = current.get("observation_time")
+    # TODO - good enough for now to check if the key 'current_observation' exists
+    # But: should really add testing for exceptions**
+    # Any of the following initializations can cause fatal errors. Need exception handling asap
+    if current:
+        full = current.get("display_location").get("full")
+        temp_f = current.get("temp_f")
+        temp_c = current.get("temp_c")
+        weather = current.get("weather")
+        temperature_string = current.get("temperature_string")
+        obs_time = current.get("observation_time")
 
-    location = Location(full, temp_f, temp_c, temperature_string, weather, obs_time)
-    location.print_string_representation()
+        location = Location(full, temp_f, temp_c, temperature_string, weather, obs_time)
+        location.print_string_representation()
+    else:
+        print "Key \'current_observation\' not available. Exiting."
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
